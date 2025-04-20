@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from './Components/Navbar'
-import Carousel from './Components/Carousel'
 import HeroSection from './Components/HeroSection'
 import About from './Components/About'
 import Latest from './Components/Latest'
@@ -15,7 +14,7 @@ function LandingPage() {
        <About/>
        <Latest/>
        <ContactForm/>
-      <Carousel/>
+      
     </div>
      
     </>
