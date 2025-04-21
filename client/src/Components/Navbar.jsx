@@ -12,7 +12,7 @@ function Navbar() {
       <header>
         <nav className=" fixed top-0 w-full z-10 flex items-center justify-between px-6 py-4 backdrop-blur-md bg-gray-950/30 h-[60px] shadow-md   ">
           {/* Left - Logo */}
-          <div className="text-2xl ml-10 font-bold text-green-800 flex gap-1">
+          <div className="text-2xl  font-bold text-green-800 flex gap-1">
             <img src={logo} alt="" width={40} height={40} className="rounded-xl" />
             <a href="#" >
               Veg<span className="text-emerald-900">cart</span>
@@ -48,7 +48,7 @@ function Navbar() {
           </ul>
 
           {/* Right - Icons */}
-          <div className="flex items-center gap-6 mr-10">
+          <div className="flex items-center gap-6 ">
             <a href="#">
               <img src={bag} alt="Bag" className="w-6 h-6" />
             </a>
