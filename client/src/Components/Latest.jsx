@@ -13,8 +13,8 @@ function Latest() {
   ];
 
   return (
-    <section className="bg-white  min-h-screen ">
-      <div className="bg-[#77B254]  rounded-t-4xl pt-10 pb-15 px-4 w-full ">
+    <section className="bg-white">
+      <div className="bg-[#77B254]  rounded-t-4xl pt-10 pb-15 px-4 w-full h-full ">
         <h2 className="text-3xl font-bold text-center text-emerald-950 mb-10">
           Latest Items
         </h2>

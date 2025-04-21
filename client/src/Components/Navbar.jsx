@@ -68,7 +68,7 @@ function Navbar() {
 
         {/* Mobile Nav Links */}
         {isOpen && (
-          <ul className=" fixed top-0 w-full flex flex-col gap-4 px-6 py-4 mt-15 bg-gray-950/30 backdrop-blur-md md:hidden text-white font-medium">
+          <ul className=" fixed top-0 w-full z-10 flex flex-col gap-4 px-6 py-4 mt-15 bg-gray-950/30 backdrop-blur-md md:hidden text-white font-medium">
             <li>
               <a
                 href="#home"
