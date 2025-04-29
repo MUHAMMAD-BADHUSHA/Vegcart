@@ -2,9 +2,10 @@ import React from "react";
 import { useState } from "react";
 import logo from '../assets/logo2.png'
 import bag from "../assets/bag.svg";
-import cart from "../assets/cart.svg";
+import login from "../assets/login.svg";
 import menu from "../assets/menu.svg";
 import close from "../assets/close.svg";
+import { Link } from "react-router-dom";
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -49,12 +50,12 @@ function Navbar() {
 
           {/* Right - Icons */}
           <div className="flex items-center gap-6 ">
-            <a href="#">
+            <Link to={'/shop'}>
               <img src={bag} alt="Bag" className="w-6 h-6" />
-            </a>
-            <a href="#">
-              <img src={cart} alt="Cart" className="w-6 h-6" />
-            </a>
+            </Link>
+            <Link to={'/signin'}>
+              <img src={login} alt="Cart" className="w-6 h-6" />
+            </Link>
             {/* Mobile Menu Toggle */}
             <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? (

@@ -23,7 +23,7 @@ function Latest() {
           {latestItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 w-64"
+              className="bg-white rounded-md overflow-hidden shadow-2xl  hover:shadow-xl transition duration-300"
             >
               <div className="w-full h-48 flex items-center justify-center bg-emerald-100">
                 <img
