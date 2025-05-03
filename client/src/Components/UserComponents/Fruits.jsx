@@ -1,30 +1,36 @@
-import React from 'react'
-import apple from "../../assets/apple.png";
-import grape from "../../assets/grape.png";
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import cart from "../../assets/cart.svg";
 
-const fruit=[
-  { id: 4, name: "Grape", image: grape, price: 250 },
-    { id: 1, name: "Apple", image: apple, price: 250 },
-]
+
 function Fruits() {
+  const [fruits,setFruits] = useState([])
+   useEffect(()=>{
+
+    axios.get('http://localhost:4000/getFruits')
+    .then((response)=>{
+      console.log(response.data)
+      setFruits(response.data.data)})
+    .catch((err)=>{console.log('err:',err)})
+
+   },[])
   return (
     <div>
     <div className="flex flex-wrap  justify-center gap-3 pt-20 pb-10">
               
-              {fruit.map((Items) => (
+              {fruits.map((fruit) => (
                 <div
-                  key={Items.id}
-                  className="bg-white rounded-md shadow-md overflow-hidden hover:shadow-2xl transition-shadow z-9"
+                  key={fruit.id}
+                  className="bg-white/80  hover:shadow-[0_0_15px_white] transition-transform ease-in-out duration-600 hover:scale-105  rounded-md shadow-md overflow-hidden  z-9  "
                 >
                   <img
-                    src={Items.image}
-                    alt={Items.name}
-                    className="w-full h-48 object-cover"
+                    src={`http://localhost:4000${fruit.image}`}
+                    alt={fruit.name}
+                    className="w-full h-30 object-cover"
                   />
                   <div className="p-4">
-                    <h2 className="text-lg font-semibold">{Items.name}</h2>
-                    <p className="text-black font-bold">₹{Items.price}-1kg</p>
+                    <h2 className="text-black text-lg font-semibold">{fruit.name}</h2>
+                    <p className="text-black font-bold">₹{fruit.price}-1kg</p>
                     <button className=" flex mt-2 px-4 py-2 bg-emerald-950 text-white rounded hover:bg-emerald-700 gap-1.5">
                       <img src={cart} alt="" width={20} height={30} /> Add to Cart
                     </button>

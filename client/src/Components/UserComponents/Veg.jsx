@@ -1,32 +1,36 @@
-import React from 'react'
-import veg1 from "../../assets/cauliflower.png";
-import veg2 from "../../assets/capsicum.png";
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import cart from "../../assets/cart.svg";
 
-const vege=[
- 
-  { id: 2, name: "Cauliflower", image: veg1, price: 150 },
-  { id: 3, name: "Capsicum", image: veg2, price: 180 },
-  { id: 2, name: "Cauliflower", image: veg1, price: 150 },
-  { id: 3, name: "Capsicum", image: veg2, price: 180 },
-]
+
 function Veg() {
+  const [vegetables,setVegetables] = useState([])
+  useEffect(()=>{
+    axios.get('http://localhost:4000/getVegetables')
+    .then((response)=>{
+      console.log(response.data)
+      setVegetables(response.data.data)
+      
+    })
+    .catch((err)=>{console.log('err',err)})
+
+  },[])
   return (
     <div>
       <div className="flex flex-wrap  justify-center gap-3 pt-20 pb-10">
-                {vege.map((Items) => (
+                {vegetables.map((veg) => (
                   <div
-                    key={Items.id}
-                    className="bg-white rounded-md shadow-md overflow-hidden hover:shadow-2xl transition-shadow z-9"
+                    key={veg.id}
+                    className="bg-white hover:shadow-[0_0_15px_white]  ease-in-out duration-600 hover:scale-105 rounded-md shadow-md overflow-hidden  transition-transform z-9 "
                   >
                     <img
-                      src={Items.image}
-                      alt={Items.name}
-                      className="w-full h-48 object-cover"
+                      src={`http://localhost:4000${veg.image}`}
+                      alt={veg.name}
+                      className="w-full h-30 object-cover"
                     />
                     <div className="p-4">
-                      <h3 className="text-lg font-semibold">{Items.name}</h3>
-                      <p className="text-black font-bold">₹{Items.price}-1kg</p>
+                      <h3 className=" text-black text-lg font-semibold">{veg.name}</h3>
+                      <p className="text-black font-bold">₹{veg.price}/kg</p>
                       <button className=" flex mt-2 px-4 py-2 bg-emerald-950 text-white rounded hover:bg-emerald-700 gap-1.5">
                         <img src={cart} alt="" width={20} height={30} /> Add to Cart
                       </button>

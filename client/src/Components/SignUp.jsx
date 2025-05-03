@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import bg from '../assets/bg.jpg'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios'
+
 function SignUp() {
+  const [name,setName]=useState('')
+  const [email,setEmail]=useState('')
+  const [password,setPassword]=useState('')
+  const navigate = useNavigate()
+
+  const handlSubmit = (e)=>{
+    e.preventDefault()
+    axios.post('http://localhost:4000/register/signup',{name,email,password})
+    .then((response)=>{
+      console.log(response.data)
+      if(response.data.success){
+        navigate('/signin')
+      }
+    })
+    .catch((err)=>console.log(err))
+    
+  }
   return (
     <>
       <section id="contact"
@@ -13,7 +32,7 @@ function SignUp() {
           <h2 className="text-2xl font-semibold text-center text-white mb-6">
             Sign Up
           </h2>
-          <form action="#" method="POST">
+          <form onSubmit={handlSubmit} method="POST">
             <div className="mb-4">
               <label htmlFor="name" className="block text-white">
                 Full Name
@@ -24,6 +43,7 @@ function SignUp() {
                 name="name"
                 className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Enter your full name"
+                onChange={(e)=>setName(e.target.value)}
                 required
               />
             </div>
@@ -33,10 +53,12 @@ function SignUp() {
               </label>
               <input
                 type="text"
-                id="name"
-                name="name"
+                id="email"
+                name="email"
                 className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Enter your email"
+                onChange={(e)=>setEmail(e.target.value)}
+
                 required
               />
             </div>
@@ -46,11 +68,13 @@ function SignUp() {
                 Password
               </label>
               <input
-                type="email"
-                id="email"
-                name="email"
+                type="text"
+                id="password"
+                name="password"
                 className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Enter a password"
+                onChange={(e)=>setPassword(e.target.value)}
+
                 required
               />
             </div>

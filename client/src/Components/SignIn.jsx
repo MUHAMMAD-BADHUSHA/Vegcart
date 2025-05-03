@@ -1,7 +1,26 @@
-import React from "react";
+import React, {  useState } from "react";
 import bg from '../assets/bg.jpg'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 function SignIn() {
+  const [email,setEmail]=useState('')
+  const [password,setPassword]=useState('')
+  const navigate = useNavigate()
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    axios.post('http://localhost:4000/register/signin',{email,password})
+    .then((response)=>{
+      if (response.data.success){
+        localStorage.setItem('token',response.data.token)
+        if(response.data.admin){
+         navigate('/admin')
+        }else{
+          navigate('/user')
+        }
+      }
+    })
+    .catch((err)=>console.log(err.message))
+  }
   return (
     <>
       <section id="contact"
@@ -13,7 +32,7 @@ function SignIn() {
           <h2 className="text-2xl font-semibold text-center text-white mb-6">
             Sign In
           </h2>
-          <form action="#" method="POST">
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-white">
                 Email
@@ -24,6 +43,7 @@ function SignIn() {
                 name="name"
                 className="w-full p-3 mt-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Enter your full name"
+                onChange={(e)=>setEmail(e.target.value)}
                 required
               />
             </div>
@@ -33,11 +53,12 @@ function SignIn() {
                 Password
               </label>
               <input
-                type="email"
-                id="email"
-                name="email"
+                type="text"
+                id="text"
+                name="password"
                 className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="Enter your email address"
+                placeholder="Enter your password"
+                onChange={(e)=>setPassword(e.target.value)}
                 required
               />
             </div>

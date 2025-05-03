@@ -7,6 +7,8 @@ import AddProducts from './Components/AdminComponents/AddProducts'
 import SignIn from './Components/SignIn'
 import SignUp from './Components/SignUp'
 import UserHome from './Components/UserComponents/UserHome'
+import EditItem from './Components/AdminComponents/EditItem'
+import UserCrat from './Components/UserComponents/UserCrat'
 function App() {
   
   const [isAdmin,setIsAdmin]=useState(false)
@@ -21,12 +23,17 @@ function App() {
       
       {/*user Routes */}
       <Route path='/home' element={<><LandingPage/><Footer/></>}/>
-      <Route path='/shop' element={isLogged ?<>{isAdmin?<Admindash/>:<UserHome/>}</> :<SignIn/>}/>
+      <Route path='/user' element={isLogged ?<>{isAdmin?<Admindash/>:<UserHome/>}</> :<SignIn/>}/>
+      <Route path='/cart' element={<><UserCrat/><Footer/></>}/>
+
       {/*Admin Routes */}
 
       <Route path='/admin' element={<Admindash/>}/>
       <Route path='/dashbord' element={<Admindash/>}/>
-      <Route path='/addProduct' element={<AddProducts/>}/>  
+      <Route path='/addProduct' element={<AddProducts/>}/> 
+      <Route path='/editItem/:id' element={<EditItem/>}/> 
+
+
 
     </Routes>
    </Router>

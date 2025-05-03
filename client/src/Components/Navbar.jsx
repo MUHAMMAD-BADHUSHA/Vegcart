@@ -50,7 +50,7 @@ function Navbar() {
 
           {/* Right - Icons */}
           <div className="flex items-center gap-6 ">
-            <Link to={'/shop'}>
+            <Link to={'/user'}>
               <img src={bag} alt="Bag" className="w-6 h-6" />
             </Link>
             <Link to={'/signin'}>

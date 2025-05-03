@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
-import apple from "../../assets/apple.png";
 import bg from "../../assets/bg1.jpg";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 
 
 function Products() {
+  const navigate=useNavigate()
   const [items, setItems] = useState([]);
+
+  const handleDelete = (id)=>{
+    alert('are want to delete')
+    axios.delete('http://localhost:4000/admin/delete/'+id)
+    .then((response)=>console.log(response.data.message))
+    location.reload()
+    .catch((err)=>console.log(err.message))
+  }
+  
+
   useEffect(() => {
     axios
       .get("http://localhost:4000/admin/items")
@@ -46,7 +56,7 @@ function Products() {
                 >
                   <td className="sm:py-3 sm:px-6 flex items-center justify-center">
                     <img
-                      src={apple}
+                      src={`http://localhost:4000${item.image}`}
                       alt={item.name}
                       className="w-12 h-12 sm:w-16 sm:h-16 object-cover"
                     />
@@ -55,10 +65,10 @@ function Products() {
                   <td className="py-2 px-3 sm:py-3 sm:px-6 text-center">₹{item.price}</td>
                   <td className="sm:py-3 sm:px-6">
                     <div className="flex items-center justify-center gap-1 sm:gap-2">
-                      <button className="bg-blue-500 text-white px-2 py-1 sm:px-4 sm:py-1 rounded hover:bg-blue-600 text-xs sm:text-sm">
+                      <button onClick={()=>navigate('/editItem/'+item._id)} className="bg-blue-500 text-white px-2 py-1 sm:px-4 sm:py-1 rounded hover:bg-blue-600 text-xs sm:text-sm">
                         Edit
                       </button>
-                      <button className="bg-red-500 text-white px-2 py-1 sm:px-4 sm:py-1 rounded hover:bg-red-600 text-xs sm:text-sm">
+                      <button onClick={()=>handleDelete(item._id)} className="bg-red-500 text-white px-2 py-1 sm:px-4 sm:py-1 rounded hover:bg-red-600 text-xs sm:text-sm">
                         Delete
                       </button>
                     </div>

@@ -1,8 +1,9 @@
 const express = require('express');
+const { getVegetables, getFruit } = require('../Controllers/UserController');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('user router');
-});
 
-module.exports = router; // ✅ Correct export
+router.get('/getVegetables',getVegetables);
+router.get('/getFruits',getFruit);
+
+module.exports = router;
