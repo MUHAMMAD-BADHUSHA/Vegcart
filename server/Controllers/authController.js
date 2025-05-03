@@ -37,7 +37,7 @@ const signIn = async (req, res) => {
       } else {
         const user = await userModel.findOne({ email });
   
-        // 🔴 Add this check
+        
         if (!user) {
           return res.status(404).json({ success: false, message: 'User not found' });
         }
