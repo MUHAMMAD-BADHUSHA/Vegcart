@@ -14,15 +14,15 @@ const Footer = () => {
           <div className="flex space-x-6">
             {/* Social Media Links */}
             <a href="#" target="_blank" rel="noopener noreferrer" className="text-xl hover:text-green-200">
-              <i className="fab fa-facebook"></i> {/* You can add FontAwesome icon here */}
+              <i className="fab fa-facebook"></i> 
               Facebook
             </a>
             <a href="#" target="_blank" rel="noopener noreferrer" className="text-xl hover:text-green-200">
-              <i className="fab fa-twitter"></i> {/* Add FontAwesome for Twitter */}
+              <i className="fab fa-twitter"></i> 
               Twitter
             </a>
             <a href="#" target="_blank" rel="noopener noreferrer" className="text-xl hover:text-green-200">
-              <i className="fab fa-instagram"></i> {/* Add FontAwesome for Instagram */}
+              <i className="fab fa-instagram"></i>
               Instagram
             </a>
           </div>

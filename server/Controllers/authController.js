@@ -1,6 +1,7 @@
 const userModel = require('../Models/UserModel')
 const bcrypt =require('bcryptjs')
-
+const jwt =require('jsonwebtoken')
+require('dotenv').config()
 const signUp = async (req, res) => {
     try {
 
@@ -15,6 +16,7 @@ const signUp = async (req, res) => {
 
         const newUser = new userModel({name, email, password:hashedPassword})
         await newUser.save()
+
         res.status(200).json({ success: true, message: 'user registered' })
     } catch (error) {
         res.status(500).json({ message: 'server error', error })
@@ -25,8 +27,8 @@ const signIn = async (req, res) => {
       const { email, password } = req.body;
   
       if (email === 'admin123@gmail.com' && password === 'admin') {
+
         const admin = await userModel.findOne({ email });
-  
         if (!admin) {
           return res.status(404).json({ success: false, message: 'Admin user not found in database' });
         }
@@ -37,7 +39,7 @@ const signIn = async (req, res) => {
       } else {
         const user = await userModel.findOne({ email });
   
-        // 🔴 Add this check
+        
         if (!user) {
           return res.status(404).json({ success: false, message: 'User not found' });
         }
@@ -54,7 +56,7 @@ const signIn = async (req, res) => {
         return res.status(200).json({ success: true, message: 'User signed in', data: user, token });
       }
     } catch (error) {
-      console.error(error); // 👈 Add this to see error in console
+      console.error(error); 
       res.status(500).json({ success: false, message: 'Server error', error: error.message });
     }
   };

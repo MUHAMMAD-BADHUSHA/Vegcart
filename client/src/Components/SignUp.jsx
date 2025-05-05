@@ -11,7 +11,7 @@ function SignUp() {
 
   const handlSubmit = (e)=>{
     e.preventDefault()
-    axios.post('http://localhost:4000/register/signup',{name,email,password})
+    axios.post('http://localhost:4000/auth/signup',{name,email,password})
     .then((response)=>{
       console.log(response.data)
       if(response.data.success){

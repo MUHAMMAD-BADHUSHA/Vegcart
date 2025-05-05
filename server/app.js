@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const adminRouter = require('./Routes/adminRouter')
 const userRouter = require('./Routes/userRouter')
-const registerRoute = require('./Routes/registerRoute')
+const authRoute = require('./Routes/authRoute')
 
 mongoose.connect(process.env.MONGODB_URL)
 .then(console.log('database connected'))
@@ -15,7 +15,7 @@ app.use(express.json())
 app.use('/uploads', express.static('uploads')); 
 app.use('/',userRouter)
 app.use('/admin',adminRouter)
-app.use('/register',registerRoute)
+app.use('/auth',authRoute)
 
 
 
