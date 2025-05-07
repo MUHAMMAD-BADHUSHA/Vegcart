@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import logo from '../../assets/logo2.png'
 import bag from "../../assets/bag.svg";
-import cart from "../../assets/cart.svg";
+import logout from "../../assets/logout.svg";
 import menu from "../../assets/menu.svg";
 import close from "../../assets/close.svg";
 import { Link } from "react-router-dom";
@@ -52,8 +52,8 @@ function AdminNav() {
             <Link to={'/items'}>
               <img src={bag} alt="Bag" className="w-6 h-6" />
             </Link>
-            <Link >
-              <img src={cart} alt="Cart" className="w-6 h-6" />
+            <Link to={'/'}>
+              <img src={logout} alt="Cart" className="w-6 h-6" />
             </Link>
             {/* Mobile Menu Toggle */}
             <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>

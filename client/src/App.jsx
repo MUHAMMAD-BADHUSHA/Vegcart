@@ -4,8 +4,8 @@ import LandingPage from './LandingPage'
 import Footer from './Components/Footer'
 import Admindash from './Components/AdminComponents/Admindash'
 import AddProducts from './Components/AdminComponents/AddProducts'
-import SignIn from './Components/SignIn'
-import SignUp from './Components/SignUp'
+import SignIn from './SignIn'
+import SignUp from './SignUp'
 import UserHome from './Components/UserComponents/UserHome'
 import EditItem from './Components/AdminComponents/EditItem'
 import UserCrat from './Components/UserComponents/UserCrat'
@@ -13,7 +13,7 @@ import { AppContext } from './Context/AppContext'
 
 function App() {
   
-  const [isAdmin,setIsAdmin,isLogged,setIsLogged]=useContext(AppContext)
+  const {isAdmin,setIsAdmin,isLogged,setIsLogged}=useContext(AppContext)
   
   return (
    <>

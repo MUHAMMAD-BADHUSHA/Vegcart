@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import bg from "../assets/bg.jpg";
+import React, { useContext, useState } from "react";
+import bg from "./assets/bg.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AppContext } from "./Context/AppContext";
 function SignIn() {
+  const {setIsAdmin,setIsLogged} = useContext(AppContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -13,8 +15,10 @@ function SignIn() {
         if (response.data.success) {
           localStorage.setItem("token", response.data.token);
           console.log(response.data);
+          setIsLogged(true)
           if (response.data.admin) {
-            navigate("/admin");
+            setIsAdmin(true)
+            navigate("/user");
           } else {
             navigate("/user");
           }

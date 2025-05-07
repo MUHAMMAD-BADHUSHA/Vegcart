@@ -8,7 +8,7 @@ function AppProvider() {
   const data = { isAdmin, setIsAdmin, isLogged, setIsLogged };
   return (
     <div>
-      <AppContext.Provider value={{ data:data }}>
+      <AppContext.Provider value={ data }>
         <App />
       </AppContext.Provider>
     </div>

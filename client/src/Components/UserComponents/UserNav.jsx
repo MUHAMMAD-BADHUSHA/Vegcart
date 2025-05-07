@@ -57,7 +57,7 @@ function UserNav() {
             <Link to={'/items'}>
               <img src={person} alt="Bag" className="w-6 h-6" />
             </Link>
-            <Link to={'/home'}>
+            <Link to={'/'}>
               <img src={logout} alt="Cart" className="w-6 h-6" />
             </Link>
             {/* Mobile Menu Toggle */}
