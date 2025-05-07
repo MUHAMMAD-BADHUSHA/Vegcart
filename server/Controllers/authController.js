@@ -28,7 +28,7 @@ const signIn = async (req, res) => {
   
       if (email === 'admin123@gmail.com' && password === 'admin') {
 
-        const admin = await userModel.findOne({ email });
+        const admin = await userModel.findOne({email});
         if (!admin) {
           return res.status(404).json({ success: false, message: 'Admin user not found in database' });
         }

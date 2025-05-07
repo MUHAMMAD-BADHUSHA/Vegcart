@@ -51,7 +51,7 @@ function UserNav() {
 
           {/* Right - Icons */}
           <div className="flex items-center gap-6 ">
-          <Link >
+          <Link to={'/cart'}>
               <img src={cart} alt="Cart" className="w-6 h-6" />
             </Link>
             <Link to={'/items'}>

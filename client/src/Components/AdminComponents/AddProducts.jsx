@@ -7,8 +7,8 @@ function AddProducts() {
   const [price, setPrice] = useState();
   const [category, setCategory] = useState("");
   const [file, setFile] = useState(null);
-  const handleAdd =() => {
-    
+  const handleAdd =(e) => {
+    e.preventDefault()
     const formData= new FormData()
     formData.append('image',file),
     formData.append('name',name),
@@ -18,7 +18,7 @@ function AddProducts() {
      axios.post("http://localhost:4000/admin/additem", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     })
-    .then((response) => console.log(response.data.message))
+    .then((response) => {console.log(response.data)})
     .catch((err) => console.log(err));
   };
   return (

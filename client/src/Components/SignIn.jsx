@@ -8,18 +8,19 @@ function SignIn() {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios .post("http://localhost:4000/auth/signin",{ email, password })
+    axios.post("http://localhost:4000/auth/signin", { email, password })
     .then((response) => {
         if (response.data.success) {
           localStorage.setItem("token", response.data.token);
+          console.log(response.data);
           if (response.data.admin) {
             navigate("/admin");
           } else {
             navigate("/user");
           }
         }
-    })
-    .catch((err) => console.log(err.message));
+      })
+      .catch((err) => console.log(err.message));
   };
   return (
     <>
@@ -40,8 +41,8 @@ function SignIn() {
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="email"
+                  name="email"
                   className="w-full p-3 mt-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                   placeholder="Enter your full name"
                   onChange={(e) => setEmail(e.target.value)}
