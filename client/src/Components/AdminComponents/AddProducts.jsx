@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AdminNav from "./AdminNav";
 import axios from "axios";
+import { AppContext } from "../../Context/AppContext";
 
 function AddProducts() {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState();
-  const [category, setCategory] = useState("");
-  const [file, setFile] = useState(null);
+  const { 
+    name, setName,
+    price, setPrice,
+    category, setCategory,
+    file, setFile  } =useContext(AppContext)
+    
   const handleAdd =(e) => {
     e.preventDefault()
     const formData= new FormData()

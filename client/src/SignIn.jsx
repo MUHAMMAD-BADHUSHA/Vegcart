@@ -4,9 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AppContext } from "./Context/AppContext";
 function SignIn() {
-  const {setIsAdmin,setIsLogged} = useContext(AppContext)
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    setIsAdmin,setIsLogged,
+    email, setEmail,
+    password, setPassword 
+    } = useContext(AppContext)
+  
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();

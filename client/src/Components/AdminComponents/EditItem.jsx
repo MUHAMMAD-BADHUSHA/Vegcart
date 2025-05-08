@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useContext } from "react";
 import AdminNav from "./AdminNav";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { AppContext } from "../../Context/AppContext";
 
 function EditItem() {
     const {id}=useParams()
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState('');
-  const [category, setCategory] = useState("");
-  const [file, setFile] = useState(null);
+    const { 
+     name, setName,
+     price, setPrice,
+     category, setCategory,
+     file, setFile  } = useContext(AppContext)
 
   useEffect(()=>{
     axios.get('http://localhost:4000/admin/editItem/'+id)

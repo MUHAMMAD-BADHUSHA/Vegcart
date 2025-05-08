@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext} from "react";
 import bg from './assets/bg.jpg'
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { AppContext } from "./Context/AppContext";
 
 function SignUp() {
-  const [name,setName]=useState('')
-  const [email,setEmail]=useState('')
-  const [password,setPassword]=useState('')
+  const {
+    name, setName ,
+    email, setEmail,
+    password, setPassword
+  } = useContext(AppContext)
   const navigate = useNavigate()
 
   const handlSubmit = (e)=>{
