@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import logo from '../../assets/logo2.png'
 import bag from "../../assets/bag.svg";
@@ -6,7 +6,9 @@ import logout from "../../assets/logout.svg";
 import menu from "../../assets/menu.svg";
 import close from "../../assets/close.svg";
 import { Link } from "react-router-dom";
+import { AppContext } from "../../Context/AppContext";
 function AdminNav() {
+  const {setIsLogged} = useContext(AppContext)
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -38,11 +40,11 @@ function AdminNav() {
               </Link>
             </li>
             <li>
-              <Link
+              <Link to={"/userList"}
                 href="#contact"
                 className="hover: border-b-2 border-transparent hover:border-b-emerald-900  hover:text-emerald-900"
               >
-                Contact
+                UserList
               </Link>
             </li>
           </ul>
@@ -53,7 +55,7 @@ function AdminNav() {
               <img src={bag} alt="Bag" className="w-6 h-6" />
             </Link>
             <Link to={'/'}>
-              <img src={logout} alt="Cart" className="w-6 h-6" />
+              <img onClick={()=>setIsLogged(false)} src={logout} alt="Cart" className="w-6 h-6" />
             </Link>
             {/* Mobile Menu Toggle */}
             <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import bg from "../../assets/bg1.jpg";
+import bg from "/bg1.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ function Products() {
   const [items, setItems] = useState([]);
 
   const handleDelete = (id)=>{
-    alert('are want to delete')
+    window.confirm('are want to delete')
     axios.delete('http://localhost:4000/admin/delete/'+id)
     .then((response)=>console.log(response.data.message))
     location.reload()

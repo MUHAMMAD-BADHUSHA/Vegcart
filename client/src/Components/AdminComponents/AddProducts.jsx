@@ -27,13 +27,13 @@ function AddProducts() {
   return (
     <>
       <AdminNav />
-      <div className="pt-24 flex justify-center">
+      <div className="pt-24 flex justify-center bg-white">
         <form
           onSubmit={handleAdd}
-          className="bg-white p-8 rounded shadow-md w-full max-w-md space-y-4"
+          className="bg-emerald-50 p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-4"
         >
-          <h2 className="text-2xl font-bold text-center text-gray-700">
-            Add Product
+          <h2 className="text-2xl font-bold text-center text-green-700">
+            Add Item
           </h2>
 
           {/* Product Name */}
@@ -88,7 +88,7 @@ function AddProducts() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+            className="w-full bg-green-600 text-white py-2 rounded hover:bg-emerald-300 transition"
           >
             Add Product
           </button>

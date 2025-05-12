@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import cart from "../../assets/cart.svg";
 
 
 function Veg() {
+  const token = localStorage.getItem("token")
   const [vegetables,setVegetables] = useState([])
   useEffect(()=>{
     axios.get('http://localhost:4000/getVegetables')
@@ -19,7 +20,7 @@ function Veg() {
   const handleAddtoCart = (id)=>{
     axios.post('http://localhost:4000/addtocart/'+id)
     .then((response)=>console.log(response.data.message))
-    .catch((err)=>console.log(err.message))
+    .catch((err)=>console.log('error from frontend',err.message))
   }
  
   return (
@@ -27,8 +28,8 @@ function Veg() {
       <div className="flex flex-wrap  justify-center gap-3 pt-20 pb-10">
                 {vegetables.map((veg) => (
                   <div
-                    key={veg.id}
-                    className="bg-white hover:shadow-[0_0_15px_white]  ease-in-out duration-600 hover:scale-105 rounded-md shadow-md overflow-hidden  transition-transform z-9 "
+                    key={veg._id}
+                    className="bg-white hover:shadow-[0_0_15px_black]  ease-in-out duration-600 hover:scale-105 rounded-md shadow-md overflow-hidden  transition-transform z-9 "
                   >
                     <img
                       src={`http://localhost:4000${veg.image}`}

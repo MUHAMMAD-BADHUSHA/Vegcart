@@ -1,5 +1,6 @@
-const ItemsModel = require('../Models/ItemsModel')
-
+const ItemsModel = require('../Models/ItemsModel');
+const userModel = require('../Models/UserModel');
+const UserModel = require('../Models/UserModel')
 
 const addItem = async(req, res) => {
     try {
@@ -84,5 +85,31 @@ const editItem = async (req, res) => {
       res.status(500).json({ success: false, message: 'Server error', error });
     }
   };
+
+ const getUserList = async(req,res)=>{
+  try {
+    const userList = await UserModel.find()
+    
+    if(!userList){
+      return res.status(500).json({message:'Users not found'})
+    }
+
+    res.status(200).json({success:true,data:userList})
+
+  } catch (error) {
+   console.log('error from server',error) 
+   res.status(500).json({message:'error from server',error})
+  }
+ }
   
-module.exports = {addItem,getItems,deleteItem,editItem,updateItem}
+ const deleteUser = async(req,res)=>{
+  try {
+      const {id} =req.params
+      const deleteUser= await userModel.findByIdAndDelete({_id:id})
+      res.status(200).json({success:true,message:'item deleted',data:deleteUser})
+  } catch (error) {
+      console.log('deletion Err',error)
+      res.status(400).json({success:false,message:'Err in server:',error})
+  }
+}
+module.exports = {addItem,getItems,deleteItem,editItem,updateItem,getUserList,deleteUser}

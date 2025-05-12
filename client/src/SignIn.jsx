@@ -7,8 +7,8 @@ function SignIn() {
   const {
     setIsAdmin,setIsLogged,
     email, setEmail,
-    password, setPassword 
-    } = useContext(AppContext)
+    password, setPassword,
+    setToken} = useContext(AppContext)
   
   const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -16,12 +16,13 @@ function SignIn() {
     axios.post("http://localhost:4000/auth/signin", { email, password })
     .then((response) => {
         if (response.data.success) {
+          setToken(response.data.token)
           localStorage.setItem("token", response.data.token);
           console.log(response.data);
           setIsLogged(true)
           if (response.data.admin) {
             setIsAdmin(true)
-            navigate("/user");
+            navigate("/admin");
           } else {
             navigate("/user");
           }

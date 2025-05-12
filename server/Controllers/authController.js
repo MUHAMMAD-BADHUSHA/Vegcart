@@ -26,7 +26,7 @@ const signIn = async (req, res) => {
     try {
       const { email, password } = req.body;
   
-      if (email === 'admin123@gmail.com' && password === 'admin') {
+      if (email === 'vegcart@gmail.com' && password === 'vegcart') {
 
         const admin = await userModel.findOne({email});
         if (!admin) {

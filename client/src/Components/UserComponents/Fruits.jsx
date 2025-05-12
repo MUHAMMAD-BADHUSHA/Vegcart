@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import cart from "../../assets/cart.svg";
 
@@ -26,7 +26,7 @@ function Fruits() {
               
               {fruits.map((fruit) => (
                 <div
-                  key={fruit.id}
+                  key={fruit._id}
                   className="bg-white/80  hover:shadow-[0_0_15px_white] transition-transform ease-in-out duration-600 hover:scale-105  rounded-md shadow-md overflow-hidden  z-9  "
                 >
                   <img

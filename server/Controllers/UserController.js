@@ -32,50 +32,72 @@ const getFruit = async (req, res) => {
     }
 };
 
-const addToCart = async(req,res)=>{
+const addToCart = async (req, res) => {
     try {
-        const {id} = req.params
-        const Item = await ItemsModel.findById(id)
-        if(!Item){
-            return res.status(500).json({message:'item not found'})
-        }
-        const CartItem = new CartModel({name:Item.name,price:Item.price,category:Item.category,image:Item.image})
-        await CartItem.save()
+      const { id } = req.params; 
+  
+      const item = await ItemsModel.findById({_id:id});
+      if (!item) {
+        return res.status(404).json({ message: 'Item not found' });
+      }
+  
+      let cartItem = await CartModel.findOne({name:item.name });
 
-        res.status(200).json({success:true,message:'added to cart',data:CartItem})
+      if (cartItem) {
+      
+        cartItem.quantity += 1;
+        await cartItem.save();
+        return res.status(200).json({ message: 'Quantity increased', data: cartItem });
+      } else {
+       const newCartItem = new CartModel({
+          name: item.name,
+          price: item.price,
+          category: item.category,
+          image: item.image,
+          quantity: 1
+        });
+        await newCartItem.save();
+        res.status(200).json({ success: true, message: 'Item added to cart', data: newCartItem });
+      }
+  
+      
+  
     } catch (error) {
-        console.log('error adding to cart:',error.message)
-        res.status(500).json({message:'servererror',error})
+      console.error('Error adding to cart:', error.message);
+      res.status(500).json({ message: 'Server error', error: error.message });
     }
-}
-const getCartItems = async(req,res)=>{
+  };
+  
+  const getCartItems = async (req, res) => {
     try {
-        
-        const CartItems = await CartModel.find()
-        if(!CartItems){
-            return res.status(500).json({message:'cart is emty'})
-        }
-       
-
-        res.status(200).json({success:true,message:'cart items ',data:CartItems})
+  
+      const cartItems = await CartModel.find();
+  
+      if (cartItems.length === 0) {
+        return res.status(200).json({ success: true, message: 'Cart is empty', data: [] });
+      }
+  
+      res.status(200).json({ success: true, message: 'Cart items fetched', data: cartItems });
     } catch (error) {
-        console.log('error fetch cart items:',error.message)
-        res.status(500).json({message:'server error',error})
+      console.error('Error fetching cart items:', error.message);
+      res.status(500).json({ message: 'Server error', error: error.message });
     }
-}
-
-const deleteCartItem = async(req,res)=>{
+  };
+  const deleteCartItem = async (req, res) => {
     try {
-        const {id}=req.params
-
-        const deleteCartItem = await CartModel.findByIdAndDelete(id)
-
-        res.status(200).json({success:true,message:'item removed',data:deleteCartItem})
-        
+      const { id } = req.params;
+  
+      const deletedItem = await CartModel.findOneAndDelete({ _id: id });
+  
+      if (!deletedItem) {
+        return res.status(404).json({ success: false, message: 'Item not found or unauthorized' });
+      }
+  
+      res.status(200).json({ success: true, message: 'Item removed', data: deletedItem });
     } catch (error) {
-      console.log(error);
-        
+      console.error('Error deleting item:', error.message);
+      res.status(500).json({ message: 'Server error', error: error.message });
     }
-} 
-
+  };
+  
 module.exports ={getVegetables,getFruit,addToCart, getCartItems,deleteCartItem}

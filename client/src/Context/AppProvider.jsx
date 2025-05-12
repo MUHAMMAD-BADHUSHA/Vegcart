@@ -3,16 +3,19 @@ import { AppContext } from "./AppContext";
 import React, { useState } from "react";
 
 function AppProvider() {
+
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [price, setPrice] = useState();
   const [category, setCategory] = useState("");
   const [file, setFile] = useState(null);
+  const [userList,setUserList] = useState([])
+  const [token,setToken] = useState('')
   const data = { 
-
+    
     isAdmin, setIsAdmin,
     isLogged, setIsLogged,
     name, setName ,
@@ -20,7 +23,9 @@ function AppProvider() {
     password, setPassword,
     price, setPrice,
     category, setCategory,
-    file, setFile
+    file, setFile,
+    token,setToken,
+    userList,setUserList
   
   };
   return (

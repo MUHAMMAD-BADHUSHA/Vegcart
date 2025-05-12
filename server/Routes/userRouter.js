@@ -1,5 +1,6 @@
 const express = require('express');
 const { getVegetables, getFruit, addToCart, getCartItems, deleteCartItem } = require('../Controllers/UserController');
+const auth = require('../Middilweres/auth')
 const router = express.Router();
 
 
