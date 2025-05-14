@@ -77,9 +77,9 @@ const UserCart = () => {
               {cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}
             </td>
             <td className="p-4">
-              <button className="bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2 rounded-full text-sm shadow">
+              <Link to={'/checkout'}><button className="bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2 rounded-full text-sm shadow">
                 Buy All
-              </button>
+              </button></Link>
             </td>
           </tr>
         </tbody>

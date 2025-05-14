@@ -10,8 +10,7 @@ function AddProducts() {
     category, setCategory,
     file, setFile  } =useContext(AppContext)
     
-  const handleAdd =(e) => {
-    e.preventDefault()
+  const handleAdd =() => {
     const formData= new FormData()
     formData.append('image',file),
     formData.append('name',name),

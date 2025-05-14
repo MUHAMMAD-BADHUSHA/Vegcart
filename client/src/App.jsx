@@ -12,6 +12,9 @@ import { AppContext } from './Context/AppContext'
 import UserCart from './Components/UserComponents/UserCart'
 import UserList from './Components/AdminComponents/UserList'
 import AdminNav from './Components/AdminComponents/AdminNav'
+import Checkout from './Components/UserComponents/Checkout'
+import MyOrders from './Components/UserComponents/MyOrders'
+import UserNav from './Components/UserComponents/UserNav'
 
 function App() {
   
@@ -37,6 +40,10 @@ function App() {
       <Route path='/addProduct' element={ <AddProducts/>}/> 
       <Route path='/editItem/:id' element={<EditItem/>}/> 
       <Route path='/userList' element={<><AdminNav/><UserList/></>}/>
+      <Route path='/checkout' element={<><Checkout/></>}/>
+      <Route path='/order' element={<><UserNav/><MyOrders/></>}/>
+
+
 
 
 

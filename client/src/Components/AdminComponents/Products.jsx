@@ -9,7 +9,7 @@ function Products() {
   const [items, setItems] = useState([]);
 
   const handleDelete = (id)=>{
-    window.confirm('are want to delete')
+    window.confirm('are you want to delete')
     axios.delete('http://localhost:4000/admin/delete/'+id)
     .then((response)=>console.log(response.data.message))
     location.reload()
@@ -26,20 +26,20 @@ function Products() {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Background image */}
+    <div className="relative min-h-screen overflow-hidden bg-white">
+      {/* Background image
       <img
         src={bg}
         alt=""
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
-      />
+      /> */}
 
       {/* Table container */}
       <div className="flex justify-center pt-20 px-2">
-        <div className="overflow-x-auto w-full max-w-5xl">
-          <table className="w-full backdrop-blur-xl bg-black/30 shadow-md rounded-xl overflow-hidden z-9">
+        <div className="overflow-x-auto w-full max-w-5xl shadow-2xl">
+          <table className="w-full  rounded-xl overflow-hidden z-9">
             <thead>
-              <tr className="bg-emerald-950 text-white text-sm sm:text-base">
+              <tr className="bg-emerald-100 text-green-950 text-sm sm:text-base">
                 <th className="py-2 px-3 sm:py-3 sm:px-6 text-center">Image</th>
                 <th className="py-2 px-3 sm:py-3 sm:px-6 text-center">Name</th>
                 <th className="py-2 px-3 sm:py-3 sm:px-6 text-center">Price</th>
@@ -52,13 +52,13 @@ function Products() {
               {items.map((item) => (
                 <tr
                   key={item._id}
-                  className="border-b hover:bg-gray-100/30 text-white text-sm sm:text-base"
+                  className="border-b hover:bg-emerald-900/30 text-emerald-900 text-sm sm:text-base"
                 >
                   <td className="sm:py-3 sm:px-6 flex items-center justify-center">
                     <img
                       src={`http://localhost:4000${item.image}`}
                       alt={item.name}
-                      className="w-12 h-12 sm:w-16 sm:h-16 object-cover"
+                      className="w-12 h-12 sm:w-16 sm:h-16 object-cover shadow-2xl shadow-emerald-950"
                     />
                   </td>
                   <td className="py-2 px-3 sm:py-3 sm:px-6 text-center">{item.name}</td>

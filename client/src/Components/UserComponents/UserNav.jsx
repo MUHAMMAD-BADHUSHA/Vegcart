@@ -88,7 +88,7 @@ function UserNav() {
             </li>
             <li>
               <Link
-                to={'/orders'}
+                to={'/order'}
                 className="hover:border-b border-white "
                 onClick={() => setIsOpen(false)}
               >
