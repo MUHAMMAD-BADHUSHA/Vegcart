@@ -1,10 +1,12 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import UserNav from './UserNav';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../../Context/AppContext';
+import { showError, showInfo } from '../../ToastService';
 
 const UserCart = () => {
-  const [cart, setCart] = useState([])
+  const {cart,setCart,setCartCount} = useContext(AppContext)
 
   useEffect(() => {
     axios.get('http://localhost:4000/getCartItems')
@@ -14,11 +16,13 @@ const UserCart = () => {
     })
   }, []);
 
-   const handleRemove = (id)=>{
+   const handleRemove = (id,quantity)=>{
    axios.delete('http://localhost:4000/deleteCartItem/'+id)
    .then((response)=>{
     console.log(response.data)
-    location.reload()
+    showInfo(response.data.message)
+    setCartCount((prevCount)=>prevCount-Number(quantity))
+    setCart((prevCart) => prevCart.filter(item => item._id !== id));
     })
    .catch((err)=>console.log(err.message))
    }
@@ -58,7 +62,7 @@ const UserCart = () => {
               <td className="p-4">
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full text-sm shadow"
-                  onClick={() => handleRemove(item._id)}
+                  onClick={() => handleRemove(item._id,item.quantity)}
                 >
                   Remove
                 </button>

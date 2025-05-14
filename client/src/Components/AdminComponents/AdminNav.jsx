@@ -8,7 +8,7 @@ import close from "../../assets/close.svg";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 function AdminNav() {
-  const {setIsLogged} = useContext(AppContext)
+  const {setIsLogged,setIsAdmin} = useContext(AppContext)
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -55,7 +55,7 @@ function AdminNav() {
               <img src={bag} alt="Bag" className="w-6 h-6" />
             </Link>
             <Link to={'/'}>
-              <img onClick={()=>setIsLogged(false)} src={logout} alt="Cart" className="w-6 h-6" />
+              <img onClick={()=>{setIsLogged(false),setIsAdmin(false)}} src={logout} alt="Cart" className="w-6 h-6" />
             </Link>
             {/* Mobile Menu Toggle */}
             <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -90,11 +90,11 @@ function AdminNav() {
             </li>
             <li>
               <Link
-                href="#contact"
+                to={'/userList'}
                 className="hover:border-b border-white"
                 onClick={() => setIsOpen(false)}
               >
-                Contact
+                userList
               </Link>
             </li>
           </ul>

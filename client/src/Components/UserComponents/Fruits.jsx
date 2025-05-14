@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
-import cart from "../../assets/cart.svg";
+import carticon from "../../assets/cart.svg";
+import { showSuccess } from '../../ToastService';
+import { AppContext } from '../../Context/AppContext';
 
 
 function Fruits() {
+
+  const {setCartCount,cartCount} = useContext(AppContext)
   const [fruits,setFruits] = useState([])
    useEffect(()=>{
 
@@ -17,7 +21,11 @@ function Fruits() {
    
   const handleAddtoCart = (id)=>{
     axios.post('http://localhost:4000/addtocart/'+id)
-    .then((response)=>console.log(response.data.message))
+    .then((response)=>{
+      console.log(response.data.message)
+      showSuccess(response.data.message)
+      setCartCount(cartCount+1)
+    })
     .catch((err)=>console.log(err.message))
   }
   return (
@@ -38,7 +46,7 @@ function Fruits() {
                     <h2 className="text-black text-lg font-semibold">{fruit.name}</h2>
                     <p className="text-black font-bold">₹{fruit.price}-1kg</p>
                     <button  onClick={()=>handleAddtoCart(fruit._id)} className=" flex mt-2 px-4 py-2 bg-emerald-950 text-white rounded hover:bg-emerald-700 gap-1.5">
-                      <img src={cart} alt="" width={20} height={30} /> Add to Cart
+                      <img src={carticon} alt="" width={20} height={30} /> Add to Cart
                     </button>
                   </div>
                 </div>

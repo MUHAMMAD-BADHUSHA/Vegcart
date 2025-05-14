@@ -13,6 +13,9 @@ function AppProvider() {
   const [category, setCategory] = useState("");
   const [file, setFile] = useState(null);
   const [userList,setUserList] = useState([])
+  const [cart, setCart] = useState([])
+  const [cartCount, setCartCount] = useState(0)
+
   const [token,setToken] = useState('')
   const data = { 
     
@@ -25,7 +28,9 @@ function AppProvider() {
     category, setCategory,
     file, setFile,
     token,setToken,
-    userList,setUserList
+    userList,setUserList,
+    cart, setCart,
+    cartCount, setCartCount
   
   };
   return (

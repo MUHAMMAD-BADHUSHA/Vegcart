@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import cart from "../../assets/cart.svg";
+import { showSuccess } from '../../ToastService';
+import { AppContext } from '../../Context/AppContext';
 
 
 function Veg() {
+  const {setCartCount,cartCount} = useContext(AppContext)
   const token = localStorage.getItem("token")
   const [vegetables,setVegetables] = useState([])
   useEffect(()=>{
@@ -19,7 +22,11 @@ function Veg() {
 
   const handleAddtoCart = (id)=>{
     axios.post('http://localhost:4000/addtocart/'+id)
-    .then((response)=>console.log(response.data.message))
+    .then((response)=>{
+      console.log(response.data.message)
+      showSuccess(response.data.message)
+      setCartCount(cartCount+1)
+    })
     .catch((err)=>console.log('error from frontend',err.message))
   }
  

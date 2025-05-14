@@ -3,6 +3,7 @@ import bg from "./assets/bg.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AppContext } from "./Context/AppContext";
+import { showSuccess,showError } from "./ToastService";
 function SignIn() {
   const {
     setIsAdmin,setIsLogged,
@@ -16,6 +17,7 @@ function SignIn() {
     axios.post("http://localhost:4000/auth/signin", { email, password })
     .then((response) => {
         if (response.data.success) {
+          showSuccess(response.data.message)
           setToken(response.data.token)
           localStorage.setItem("token", response.data.token);
           console.log(response.data);
@@ -28,7 +30,11 @@ function SignIn() {
           }
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => {
+        showError(err.message)
+        console.log(err.message)
+
+      });
   };
   return (
     <>

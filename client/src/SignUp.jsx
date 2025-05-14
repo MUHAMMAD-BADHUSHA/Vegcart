@@ -3,6 +3,8 @@ import bg from './assets/bg.jpg'
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { AppContext } from "./Context/AppContext";
+import { showSuccess,showError } from "./ToastService";
+
 
 function SignUp() {
   const {
@@ -17,11 +19,14 @@ function SignUp() {
     axios.post('http://localhost:4000/auth/signup',{name,email,password})
     .then((response)=>{
       console.log(response.data)
+      showSuccess(response.data.message)
       if(response.data.success){
         navigate('/signin')
       }
     })
-    .catch((err)=>console.log(err))
+    .catch((err)=>{
+      console.log(err)
+       showError(err.message)})
     
   }
   return (

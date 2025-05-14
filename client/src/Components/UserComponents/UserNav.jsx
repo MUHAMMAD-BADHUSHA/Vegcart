@@ -3,13 +3,14 @@ import { useState } from "react";
 import logo from '../../assets/logo2.png'
 import logout from "../../assets/logout.svg";
 import person from '../../assets/person.svg'
-import cart from "../../assets/cart.svg";
+import carticon from "../../assets/cart.svg";
 import menu from "../../assets/menu.svg";
 import close from "../../assets/close.svg";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
+
 function UserNav() {
-  const {setIsLogged} =useContext(AppContext)
+  const {setIsLogged,cartCount} =useContext(AppContext)
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -53,8 +54,9 @@ function UserNav() {
 
           {/* Right - Icons */}
           <div className="flex items-center gap-6 ">
-          <Link to={'/cart'}>
-              <img src={cart} alt="Cart" className="w-6 h-6" />
+          <Link to={'/cart'} className="flex">
+              <img src={carticon} alt="Cart" className="w-6 h-6" />
+              {cartCount === 0 ? "" :<p className=" text-emerald-700  text-center">{cartCount}</p>}
             </Link>
             <Link to={'/items'}>
               <img src={person} alt="Bag" className="w-6 h-6" />
