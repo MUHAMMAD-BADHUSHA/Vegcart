@@ -1,13 +1,22 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Checkout = () => {
+  const [checkoutList,setCheckoutList] = useState([])
   const cartItems = [
     { id: 1, name: 'Carrot', price: 100, quantity: 2 },
     { id: 2, name: 'Tomato', price: 150, quantity: 1 },
   ];
-
-  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+ useEffect(()=>{
+  axios.get('http://localhost:4000/checkout')
+  .then((response)=>{
+    setCheckoutList(response.data.data)
+    console.log(response.data)
+  })
+  .catch((err)=>console.log(err.message))
+ },[])
+  const totalAmount = checkoutList.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
@@ -15,20 +24,20 @@ const Checkout = () => {
         <h2 className="text-2xl font-bold mb-4 text-gray-800">Checkout</h2>
 
         <div className="space-y-4">
-          {cartItems.map((item) => (
+          {checkoutList.map((item) => (
             <div key={item.id} className="flex justify-between items-center border-b pb-2">
               <div>
                 <p className="text-gray-700 font-medium">{item.name}</p>
                 <p className="text-sm text-gray-500">Quantity: {item.quantity}</p>
               </div>
-              <p className="text-gray-800 font-semibold">${(item.price * item.quantity) / 100}</p>
+              <p className="text-gray-800 font-semibold">₹{(item.price * item.quantity)}</p>
             </div>
           ))}
         </div>
 
         <div className="mt-6 border-t pt-4 flex justify-between text-lg font-semibold">
           <p>Total:</p>
-          <p>${totalAmount / 100}</p>
+          <p>₹{totalAmount}</p>
         </div>
         <Link to={'/home'}><button
           

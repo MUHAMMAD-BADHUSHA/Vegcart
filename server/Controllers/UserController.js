@@ -99,5 +99,18 @@ const addToCart = async (req, res) => {
       res.status(500).json({ message: 'Server error', error: error.message });
     }
   };
-  
-module.exports ={getVegetables,getFruit,addToCart, getCartItems,deleteCartItem}
+  const checkout = async(req,res)=>{
+    try {
+      const checkoutList = await CartModel.find()
+
+      if(!checkoutList){
+        return res.status(500).json({message:'no cekoutlist fount'})
+      }
+      res.status(200).json({success:true,data:checkoutList})
+    } catch (error) {
+      console.log('server error:',error.message)
+      res.status(500).json({message:'server error:'+error.message})
+    }
+
+  }
+module.exports ={getVegetables,getFruit,addToCart, getCartItems,deleteCartItem,checkout}
