@@ -6,7 +6,7 @@ import { AppContext } from '../../Context/AppContext';
 
 
 function Veg() {
-  const {setCartCount,cartCount} = useContext(AppContext)
+  const {setCartCount,cartCount,userId} = useContext(AppContext)
   const token = localStorage.getItem("token")
   const [vegetables,setVegetables] = useState([])
   useEffect(()=>{
@@ -21,7 +21,7 @@ function Veg() {
   },[])
 
   const handleAddtoCart = (id)=>{
-    axios.post('http://localhost:4000/addtocart/'+id)
+    axios.post('http://localhost:4000/addtocart/'+id,{userId})
     .then((response)=>{
       console.log(response.data.message)
       showSuccess(response.data.message)

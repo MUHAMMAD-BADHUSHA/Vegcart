@@ -6,11 +6,11 @@ import { AppContext } from '../../Context/AppContext';
 import { showError, showInfo } from '../../ToastService';
 
 const UserCart = () => {
-  const {cart,setCart,setCartCount} = useContext(AppContext)
+  const {cart,setCart,setCartCount,userId} = useContext(AppContext)
   
 
   useEffect(() => {
-    axios.get('http://localhost:4000/getCartItems')
+    axios.get('http://localhost:4000/getCartItems/'+userId)
     .then((response)=>{
       console.log(response.data)
       setCart(response.data.data)

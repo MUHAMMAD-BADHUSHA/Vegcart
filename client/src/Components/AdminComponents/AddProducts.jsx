@@ -26,7 +26,7 @@ function AddProducts() {
   return (
     <>
       <AdminNav />
-      <div className="pt-24 flex justify-center bg-white">
+      <div className="pt-24 flex justify-center bg-emerald-100 min-h-screen">
         <form
           onSubmit={handleAdd}
           className="bg-emerald-50 p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-4"

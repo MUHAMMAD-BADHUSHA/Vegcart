@@ -15,7 +15,7 @@ function AppProvider() {
   const [userList,setUserList] = useState([])
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
-
+  const [userId,setUserId] =useState('')
   const [token,setToken] = useState('')
   const data = { 
     
@@ -30,7 +30,8 @@ function AppProvider() {
     token,setToken,
     userList,setUserList,
     cart, setCart,
-    cartCount, setCartCount
+    cartCount, setCartCount,
+    userId,setUserId
   
   };
   return (

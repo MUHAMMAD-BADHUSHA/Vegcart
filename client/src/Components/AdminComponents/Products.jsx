@@ -26,7 +26,7 @@ function Products() {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div className="relative min-h-screen overflow-hidden bg-white">
+    <div className="relative min-h-screen overflow-hidden bg-emerald-100">
       {/* Background image
       <img
         src={bg}
@@ -39,7 +39,7 @@ function Products() {
         <div className="overflow-x-auto w-full max-w-5xl shadow-2xl">
           <table className="w-full  rounded-xl overflow-hidden z-9">
             <thead>
-              <tr className="bg-emerald-100 text-green-950 text-sm sm:text-base">
+              <tr className="bg-emerald-200 text-green-950 text-sm sm:text-base">
                 <th className="py-2 px-3 sm:py-3 sm:px-6 text-center">Image</th>
                 <th className="py-2 px-3 sm:py-3 sm:px-6 text-center">Name</th>
                 <th className="py-2 px-3 sm:py-3 sm:px-6 text-center">Price</th>
@@ -52,7 +52,7 @@ function Products() {
               {items.map((item) => (
                 <tr
                   key={item._id}
-                  className="border-b hover:bg-emerald-900/30 text-emerald-900 text-sm sm:text-base"
+                  className="border-b bg-white hover:bg-emerald-900/30 text-emerald-900 text-sm sm:text-base"
                 >
                   <td className="sm:py-3 sm:px-6 flex items-center justify-center">
                     <img

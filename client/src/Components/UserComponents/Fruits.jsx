@@ -7,7 +7,7 @@ import { AppContext } from '../../Context/AppContext';
 
 function Fruits() {
 
-  const {setCartCount,cartCount} = useContext(AppContext)
+  const {setCartCount,cartCount,userId} = useContext(AppContext)
   const [fruits,setFruits] = useState([])
    useEffect(()=>{
 
@@ -20,7 +20,7 @@ function Fruits() {
    },[])
    
   const handleAddtoCart = (id)=>{
-    axios.post('http://localhost:4000/addtocart/'+id)
+    axios.post('http://localhost:4000/addtocart/'+id,{userId})
     .then((response)=>{
       console.log(response.data.message)
       showSuccess(response.data.message)

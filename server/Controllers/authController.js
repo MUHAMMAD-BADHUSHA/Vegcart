@@ -53,7 +53,7 @@ const signIn = async (req, res) => {
         const payload = { user: { id: user.id } };
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
   
-        return res.status(200).json({ success: true, message: 'User signed in', data: user, token });
+        return res.status(200).json({ success: true, message: 'User signed in', data: user, token, userId:user.id });
       }
     } catch (error) {
       console.error(error); 

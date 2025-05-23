@@ -34,14 +34,15 @@ const getFruit = async (req, res) => {
 
 const addToCart = async (req, res) => {
     try {
-      const { id } = req.params; 
+      const { id } = req.params;
+      const {userId} = req.body 
   
       const item = await ItemsModel.findById({_id:id});
       if (!item) {
         return res.status(404).json({ message: 'Item not found' });
       }
   
-      let cartItem = await CartModel.findOne({name:item.name });
+      let cartItem = await CartModel.findOne({userId:userId ,name:item.name });
 
       if (cartItem) {
       
@@ -54,6 +55,7 @@ const addToCart = async (req, res) => {
           price: item.price,
           category: item.category,
           image: item.image,
+          userId:userId,
           quantity: 1
         });
         await newCartItem.save();
@@ -68,25 +70,26 @@ const addToCart = async (req, res) => {
     }
   };
   
-  const getCartItems = async (req, res) => {
-    try {
-  
-      const cartItems = await CartModel.find();
-  
-      if (cartItems.length === 0) {
-        return res.status(200).json({ success: true, message: 'Cart is empty', data: [] });
-      }
-  
-      res.status(200).json({ success: true, message: 'Cart items fetched', data: cartItems });
-    } catch (error) {
-      console.error('Error fetching cart items:', error.message);
-      res.status(500).json({ message: 'Server error', error: error.message });
+ const getCartItems = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const cartItems = await CartModel.find({ userId });
+
+    if (cartItems.length === 0) {
+      return res.status(200).json({ success: true, message: 'Cart is empty', data: [] });
     }
-  };
+
+    res.status(200).json({ success: true, message: 'Cart items fetched', data: cartItems });
+  } catch (error) {
+    console.error('Error fetching cart items:', error.message);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
   const deleteCartItem = async (req, res) => {
     try {
       const { id } = req.params;
-  
       const deletedItem = await CartModel.findOneAndDelete({ _id: id });
   
       if (!deletedItem) {

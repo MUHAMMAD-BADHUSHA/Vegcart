@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import bg from "./assets/bg.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,7 +9,8 @@ function SignIn() {
     setIsAdmin,setIsLogged,
     email, setEmail,
     password, setPassword,
-    setToken} = useContext(AppContext)
+    setToken,
+    setUserId} = useContext(AppContext)
   
   const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -19,7 +20,7 @@ function SignIn() {
         if (response.data.success) {
           showSuccess(response.data.message)
           setToken(response.data.token)
-          localStorage.setItem("token", response.data.token);
+          setUserId(response.data.userId)
           console.log(response.data);
           setIsLogged(true)
           if (response.data.admin) {

@@ -26,7 +26,7 @@ const UserList = () => {
   };
 
   return (
-    <div className="min-h-screen mt-10 bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen mt-10 bg-emerald-50 py-10 px-4 sm:px-6 lg:px-8">
   <div className="max-w-6xl mx-auto">
     <h1 className="text-3xl sm:text-4xl font-semibold text-green-700 mb-8 text-center">
       User List
@@ -34,7 +34,7 @@ const UserList = () => {
 
     <div className="w-full overflow-x-auto bg-white shadow-xl rounded-2xl">
       <table className="min-w-full text-sm text-left text-gray-700">
-        <thead className="text-xs uppercase bg-green-100 text-green-700">
+        <thead className="text-xs uppercase bg-emerald-100 text-green-700">
           <tr>
             <th scope="col" className="px-4 py-4 sm:px-6 font-semibold">Name</th>
             <th scope="col" className="px-4 py-4 sm:px-6 font-semibold">Email</th>

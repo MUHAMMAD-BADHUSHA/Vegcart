@@ -4,7 +4,7 @@ import Products from './Products'
 
 function Admindash() {
   return (
-    <div >
+    <div className='bg-emerald-100'>
       <AdminNav/>
       <Products/>
     </div>
