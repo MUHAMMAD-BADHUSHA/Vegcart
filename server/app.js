@@ -6,6 +6,7 @@ const cors = require('cors')
 const adminRouter = require('./Routes/adminRouter')
 const userRouter = require('./Routes/userRouter')
 const authRoute = require('./Routes/authRoute')
+const paymentRoute =require('./Routes/paymentRoute')
 
 mongoose.connect(process.env.MONGODB_URL)
 .then(console.log('database connected'))
@@ -16,6 +17,8 @@ app.use('/uploads', express.static('uploads'));
 app.use('/',userRouter)
 app.use('/admin',adminRouter)
 app.use('/auth',authRoute)
+app.use('/payment', paymentRoute);
+
 
 
 

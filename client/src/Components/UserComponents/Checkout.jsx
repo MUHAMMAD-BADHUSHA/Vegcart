@@ -1,13 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PaymentButton from './PaymentButton';
 
 const Checkout = () => {
   const [checkoutList,setCheckoutList] = useState([])
-  const cartItems = [
-    { id: 1, name: 'Carrot', price: 100, quantity: 2 },
-    { id: 2, name: 'Tomato', price: 150, quantity: 1 },
-  ];
+  
  useEffect(()=>{
   axios.get('http://localhost:4000/checkout')
   .then((response)=>{
@@ -46,15 +44,13 @@ const Checkout = () => {
           cancel
         </button></Link>
           
-       <Link to={'/order'}> <button
-          onClick={() => alert('Payment function will be triggered')}
-          className="mt-6 w-full bg-green-600 text-white py-3 rounded-xl font-semibold hover:bg-green-700 transition"
-        >
-          Pay Now
-        </button></Link>
+      <div className="mt-6">
+  <PaymentButton amount={totalAmount} />
+     </div>
       </div>
     </div>
   );
 };
 
 export default Checkout;
+  
