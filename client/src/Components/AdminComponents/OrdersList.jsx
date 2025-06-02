@@ -28,8 +28,8 @@ function OrderList() {
         Orders
       </h2>
 
-      <div className="overflow-x-auto">
-        <table className="table w-full border rounded-lg shadow-sm">
+      <div className="overflow-x-auto rounded-2xl shadow-2xl">
+        <table className="table w-full  rounded-2xl shadow-sm">
           <thead className="bg-emerald-100 text-emerald-700">
             <tr>
               <th className="py-3 px-4 text-left">Order ID</th>

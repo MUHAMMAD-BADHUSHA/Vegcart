@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
 import { AppContext } from '../../Context/AppContext';
+import { useNavigate } from 'react-router-dom';
 
 function PaymentButton({ amount,OrderList }) {
   const {userId} = useContext(AppContext)
-
+  const navigate= useNavigate()
   const handlePayment = () => {
     // Step 1: Create order on backend
     axios.post('http://localhost:4000/payment/create-order', { amount }) // correct URL path if it's create-order
@@ -29,10 +29,8 @@ function PaymentButton({ amount,OrderList }) {
               amount:amount
             })
               .then((verifyRes) => {
+                navigate('/order')
                 alert(verifyRes.data.message);
-                
-                 Navigate('/order')
-                
               })
               .catch(() => {
                 alert('Payment verification failed');
