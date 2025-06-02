@@ -15,6 +15,7 @@ import AdminNav from './Components/AdminComponents/AdminNav'
 import Checkout from './Components/UserComponents/Checkout'
 import MyOrders from './Components/UserComponents/MyOrders'
 import UserNav from './Components/UserComponents/UserNav'
+import OrderList from './Components/AdminComponents/OrdersList'
 
 function App() {
   
@@ -32,7 +33,8 @@ function App() {
       <Route path='/home' element={<><UserHome/></>}/>
       <Route path='/user' element={isLogged ?<>{isAdmin?<Navigate to={'/admin'}/>:<UserHome/>}</> :<SignIn/>}/>
       <Route path='/cart' element={<><UserCart/><Footer/></>}/>
-
+      <Route path='/checkout' element={<><Checkout/></>}/>
+      <Route path='/order' element={<><UserNav/><MyOrders/></>}/>
       {/*Admin Routes */}
 
       <Route path='/admin' element={<Admindash/>}/>
@@ -40,8 +42,8 @@ function App() {
       <Route path='/addProduct' element={ <AddProducts/>}/> 
       <Route path='/editItem/:id' element={<EditItem/>}/> 
       <Route path='/userList' element={<><AdminNav/><UserList/></>}/>
-      <Route path='/checkout' element={<><Checkout/></>}/>
-      <Route path='/order' element={<><UserNav/><MyOrders/></>}/>
+      <Route path='/OrderList' element={<><AdminNav/><OrderList/></>}/>
+     
 
 
 

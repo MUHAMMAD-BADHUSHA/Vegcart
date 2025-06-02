@@ -1,36 +1,24 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect ,useState} from 'react';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../../Context/AppContext';
 
 const MyOrders = () => {
-  const orders = [
-    {
-      id: 'ORD123456',
-      date: '2025-05-12',
-      status: 'Delivered',
-      total: 450,
-      items: [
-        { name: 'Carrot', quantity: 2 },
-        { name: 'Tomato', quantity: 1 },
-      ],
-    },
-    {
-      id: 'ORD123457',
-      date: '2025-05-10',
-      status: 'Processing',
-      total: 300,
-      items: [
-        { name: 'Cabbage', quantity: 1 },
-        { name: 'Onion', quantity: 2 },
-      ],
-    },
-  ];
+  const {userId}=useContext(AppContext)
+  const [myOrders,setMyOrders]=useState([])
+
+  useEffect(()=>{
+    axios.get('http://localhost:4000/order/'+userId)
+    .then((response)=>setMyOrders(response.data.data))
+  },[])
+  
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-8">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6">
         <h2 className="text-2xl font-bold mb-6 text-gray-800">My Orders</h2>
 
-        {orders.map((order) => (
+        {myOrders.map((order) => (
           <div key={order.id} className="border-b border-gray-200 pb-4 mb-4">
             <div className="flex justify-between items-center">
               <div>
@@ -38,9 +26,8 @@ const MyOrders = () => {
                 <p className="text-sm text-gray-500">Placed on: {order.date}</p>
                 <p className="text-sm text-gray-500">Status: <span className={`font-medium ${order.status === 'Delivered' ? 'text-green-600' : 'text-yellow-600'}`}>{order.status}</span></p>
               </div>
-              <p className="text-lg font-bold text-gray-800">${order.total / 100}</p>
+              <p className="text-lg font-bold text-gray-800">₹{order.total}</p>
             </div>
-
             <ul className="mt-3 pl-4 text-sm text-gray-600 list-disc">
               {order.items.map((item, index) => (
                 <li key={index}>
@@ -51,7 +38,7 @@ const MyOrders = () => {
           </div>
         ))}
 
-        {orders.length === 0 && (
+        {myOrders.length === 0 && (
           <p className="text-center text-gray-500">No orders found.</p>
         )}
         <Link to={'/home'}><button

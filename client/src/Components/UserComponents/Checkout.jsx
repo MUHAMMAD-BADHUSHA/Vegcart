@@ -45,7 +45,7 @@ const Checkout = () => {
         </button></Link>
           
       <div className="mt-6">
-  <PaymentButton amount={totalAmount} />
+  <PaymentButton amount={totalAmount} OrderList={checkoutList}/>
      </div>
       </div>
     </div>

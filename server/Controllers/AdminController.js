@@ -1,4 +1,5 @@
 const ItemsModel = require('../Models/ItemsModel');
+const OrderModel = require('../Models/OrderModel');
 const userModel = require('../Models/UserModel');
 const UserModel = require('../Models/UserModel')
 
@@ -112,4 +113,28 @@ const editItem = async (req, res) => {
       res.status(400).json({success:false,message:'Err in server:',error})
   }
 }
-module.exports = {addItem,getItems,deleteItem,editItem,updateItem,getUserList,deleteUser}
+const getOrderList =async(req,res)=>{
+  try {
+    const OrderList = await OrderModel.find()
+    const newOrderList = await Promise.all(
+    OrderList.map(async (order) => {
+    const customer = await userModel.findById(order.userId);
+    return {
+      date: order.date,
+      status: order.status,
+      items: order.items,
+      customer: customer.name,
+      total:order.total
+    };
+  })
+);
+    if(!OrderList){
+      return res.status(500).json({message:'no orders'})
+    }
+    res.status(200).json({success:true,data:newOrderList})
+  } catch (error) {
+    console.log('error from server fecthing orderist',error)
+    res.status(500).json({message:'server error feching orderlist',error})
+  }
+}
+module.exports = {addItem,getItems,deleteItem,editItem,updateItem,getUserList,deleteUser,getOrderList}

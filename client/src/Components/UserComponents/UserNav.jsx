@@ -38,7 +38,7 @@ function UserNav() {
                 to={'/order'}
                 className="hover: border-b-2 border-transparent hover:border-b-emerald-900  hover:text-emerald-900  "
               >
-                orders
+                Myorders
               </Link>
             </li>
             <li>
@@ -92,7 +92,7 @@ function UserNav() {
                 className="hover:border-b border-white "
                 onClick={() => setIsOpen(false)}
               >
-                Orders
+                MyOrders
               </Link>
             </li>
             <li>

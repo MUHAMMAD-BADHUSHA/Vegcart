@@ -1,5 +1,6 @@
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
+const OrderModel = require('../Models/OrderModel');
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -12,7 +13,7 @@ const createOrder = async (req, res) => {
 
   try {
     const options = {
-      amount: amount , // Razorpay expects amount in paise
+      amount: amount*100 , // Razorpay expects amount in paise
       currency: 'INR',
       receipt: `receipt_order_${Date.now()}`,
     };
@@ -25,8 +26,8 @@ const createOrder = async (req, res) => {
 };
 
 // Verify Razorpay Signature
-const verifyPayment = (req, res) => {
-  const { order_id, payment_id, signature } = req.body;
+const verifyPayment =async (req, res) => {
+  const { order_id, payment_id, signature,OrderList,userId,amount } = req.body;
 
   const expectedSignature = crypto
     .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
@@ -34,6 +35,14 @@ const verifyPayment = (req, res) => {
     .digest('hex');
 
   if (expectedSignature === signature) {
+    const newOrder = new OrderModel({
+        date: new Date().toISOString().split('T')[0], // YYYY-MM-DD
+        items: OrderList,
+        userId:userId,
+        total:amount
+      });
+
+      await newOrder.save();
     res.status(200).json({success:true, message: 'Payment verified successfully' });
   } else {
     res.status(400).json({success:false, message: 'Payment verification failed' });

@@ -47,6 +47,14 @@ function AdminNav() {
                 UserList
               </Link>
             </li>
+            <li>
+              <Link to={"/orderList"}
+                href="#contact"
+                className="hover: border-b-2 border-transparent hover:border-b-emerald-900  hover:text-emerald-900"
+              >
+                OrderList
+              </Link>
+            </li>
           </ul>
 
           {/* Right - Icons */}
@@ -95,6 +103,13 @@ function AdminNav() {
                 onClick={() => setIsOpen(false)}
               >
                 userList
+              </Link>
+               <Link
+                to={'/OrderList'}
+                className="hover:border-b border-white"
+                onClick={() => setIsOpen(false)}
+              >
+                Orderlist
               </Link>
             </li>
           </ul>

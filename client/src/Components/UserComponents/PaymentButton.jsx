@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
+import { AppContext } from '../../Context/AppContext';
 
-function PaymentButton({ amount }) {
+function PaymentButton({ amount,OrderList }) {
+  const {userId} = useContext(AppContext)
 
   const handlePayment = () => {
     // Step 1: Create order on backend
@@ -21,9 +24,15 @@ function PaymentButton({ amount }) {
               order_id: response.razorpay_order_id,
               payment_id: response.razorpay_payment_id,
               signature: response.razorpay_signature,
+              OrderList:OrderList,
+              userId:userId,
+              amount:amount
             })
               .then((verifyRes) => {
                 alert(verifyRes.data.message);
+                
+                 Navigate('/order')
+                
               })
               .catch(() => {
                 alert('Payment verification failed');

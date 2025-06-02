@@ -1,5 +1,6 @@
 const CartModel = require('../Models/CartModel');
-const ItemsModel = require('../Models/ItemsModel')
+const ItemsModel = require('../Models/ItemsModel');
+const OrderModel = require('../Models/OrderModel');
 
 
 const getVegetables = async(req,res)=>{
@@ -116,4 +117,19 @@ const addToCart = async (req, res) => {
     }
 
   }
-module.exports ={getVegetables,getFruit,addToCart, getCartItems,deleteCartItem,checkout}
+
+  const getOrders =async(req,res)=>{
+    try {
+      const {userId} = req.params
+      const myOrders = await OrderModel.find({userId})
+      if(myOrders){
+        return res.status(200).json({data:myOrders})
+      }else{
+        res.status(500).json({message:'no order found'})
+      }
+      
+    } catch (error) {
+      res.status(500).json({message:'server error:',error})
+    }
+  }
+module.exports ={getVegetables,getFruit,addToCart, getCartItems,deleteCartItem,checkout,getOrders}
